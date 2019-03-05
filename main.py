@@ -22,7 +22,6 @@ for side in range(4):
 border_pen.hideturtle()
 
 # Create the player turtle
-
 player = turtle.Turtle()
 
 player.color("blue")
@@ -34,6 +33,17 @@ player.setheading(90)
 # everything above sets up the game board
 
 playerSpeed = 15
+
+# Create the enemy
+
+enemy = turtle.Turtle()
+enemy.color("red")
+enemy.shape("circle")
+enemy.penup()
+enemy.speed(0)
+enemy.setposition(-200, 250)
+
+enemySpeed = 2
 
 
 def moveLeft():
@@ -56,6 +66,15 @@ def moveRight():
 turtle.listen()
 turtle.onkey(moveLeft, "Left")
 turtle.onkey(moveRight, "Right")
+
+
+# Main Game loop
+while True:
+
+    # Move the enemy
+    x = enemy.xcor()
+    x += enemySpeed
+    enemy.setx(x)
 
 
 delay = raw_input("Press enter to finish.")
