@@ -1,6 +1,7 @@
 import turtle
 import os
 
+
 # setup the screen
 
 wn = turtle.Screen()
@@ -30,8 +31,27 @@ player.penup()
 player.speed(0)
 player.setposition(0, -250)
 player.setheading(90)
-
 # everything above sets up the game board
+
+playerSpeed = 15
+
+
+def moveLeft():
+    x = player.xcor()
+    x -= playerSpeed
+    player.setx(x)
+
+
+def moveRight():
+    x = player.xcor()
+    x += playerSpeed
+    player.setx(x)
+
+
+# Create keyboard bindings
+turtle.listen()
+turtle.onkey(moveLeft, "Left")
+turtle.onkey(moveRight, "Right")
 
 
 delay = raw_input("Press enter to finish.")
