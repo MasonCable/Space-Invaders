@@ -39,12 +39,16 @@ playerSpeed = 15
 def moveLeft():
     x = player.xcor()
     x -= playerSpeed
+    if x < -280:
+        x = -280
     player.setx(x)
 
 
 def moveRight():
     x = player.xcor()
     x += playerSpeed
+    if x > 280:
+        x = 280
     player.setx(x)
 
 
