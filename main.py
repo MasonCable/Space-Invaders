@@ -75,9 +75,13 @@ while True:
     # Move the enemy
     x = enemy.xcor()
     x += enemySpeed
-    if x > 280:
-        x += enemySpeed
-    elif x < -280:
-        x -= enemySpeed
+
     enemy.setx(x)
-    delay = raw_input("Press enter to finish.")
+
+    # Move the enemy back and forth
+
+    if enemy.xcor() > 280:
+        enemySpeed *= -1
+
+    if enemy.xcor() < -280:
+        enemySpeed *= -1
