@@ -62,6 +62,20 @@ bulletSpeed = 20
 # ready -> ready to fire
 # Fire -> bullet is moving
 
+bulletState = "ready"
+
+
+def fireBullet():
+    # Declare bulletstate as a global
+    global bulletState
+    if bulletState == "ready":
+        bulletState = "fire"
+        # Move Bullet to just above the player
+        x = player.xcor()
+        y = player.ycor() + 10
+        bullet.setposition(x, y)
+        bullet.showturtle()
+
 
 def moveLeft():
     x = player.xcor()
@@ -77,18 +91,6 @@ def moveRight():
     if x > 280:
         x = 280
     player.setx(x)
-
-
-def fireBullet():
-    # Declare bulletstate as a global
-    global bulletState
-
-    # Move Bullet to just above the player
-    x = player.xcor()
-    y = player.ycor() + 10
-
-    bullet.setposition(x, y)
-    bullet.showturtle()
 
 
 # Create keyboard bindings
@@ -124,3 +126,9 @@ while True:
     y = bullet.ycor()
     y += bulletSpeed
     bullet.sety(y)
+
+    # Check to see if bullet is gone
+
+    if bullet.ycor() > 275:
+        bullet.hideturtle()
+        bulletState = "ready"
