@@ -1,9 +1,8 @@
 import turtle
 import os
-
+import math
 
 # setup the screen
-
 wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("Space Invaders")
@@ -77,6 +76,15 @@ def fireBullet():
         bullet.showturtle()
 
 
+def isCollision(t1, t2):
+    distance = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) +
+                         math.pow(t1.ycor() - t2.ycor(), 2))
+    if distance < 15:
+        return True
+    else:
+        return False
+
+
 def moveLeft():
     x = player.xcor()
     x -= playerSpeed
@@ -123,12 +131,26 @@ while True:
         enemy.sety(y)
 
     # Move the bullet
-    y = bullet.ycor()
-    y += bulletSpeed
-    bullet.sety(y)
+    if bulletState == "fire":
+        y = bullet.ycor()
+        y += bulletSpeed
+        bullet.sety(y)
 
     # Check to see if bullet is gone
-
     if bullet.ycor() > 275:
         bullet.hideturtle()
         bulletState = "ready"
+
+    # Check for bullet collision with the enemy
+    if isCollision(bullet, enemy):
+        bullet.hideturtle()
+        bulletState = "ready"
+        bullet.setposition(0, -400)
+        # reset the enemy
+        enemy.setposition(-200, 250)
+
+    if isCollision(player, enemy):
+        player.hideturtle()
+        enemy.hideturtle()
+        print("Game Over")
+        break
